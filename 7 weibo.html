@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script src="jq.js"></script>
+<script>
+window.onload = function()
+{
+	var oList = document.getElementById('list1');
+	var oTxt = document.getElementById('txt1');
+	var oBtn = document.getElementById('btn1');
+	
+	oBtn.onclick = function()
+	{
+		var sValue = oTxt.value;
+		var oLi = document.createElement('li');
+		oLi.innerHTML = sValue;
+		
+		if( oList.children[0] )
+		{
+			oList.insertBefore( oLi,oList.children[0] );
+		}	
+		else
+		{
+			oList.appendChild( oLi );
+		};
+		
+		var liHeight = oLi.offsetHeight;
+		oLi.style.height = 0;
+		
+		sMove( oLi,{"height":liHeight},function(){
+			
+			sMove( oLi,{"opacity":100} );
+			
+		} );
+		
+		
+	};
+};
+</script>
+<body>
+
+<textarea id="txt1"></textarea> <input value="按钮 " type="button" id="btn1">
+<ul id="list1">
+	<!--<li>无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 </li>
+	<li>无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 </li>
+	<li>无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 无标题文档 </li>-->
+</ul>
+
+<style>
+#txt1{width:500px;height:300px;}
+*{margin:0;padding:0;list-style:none;}
+#list1{float:right;width:500px;border:3px solid red;margin-right:20px;height:500px;overflow:hidden;}
+#list1 li{padding:-15px;border-bottom:1px dashed #ccc; opacity:0;}
+</style>
+</body>
+</html>
