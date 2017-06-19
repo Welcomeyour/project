@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+*{margin:0;padding:0}
+#div1{width:200px;height:200px;overflow:hidden;position:relative;}
+#div1 span{width:80px;height:80px;background:yellow;position:absolute;top:0;left:0;opacity:0.5;filter:alpha(opacity:50);display:none;z-index:2}
+#mark{width:200px;height:200px;position:absolute;top:0;left:0;background:red;opacity:0;filter:alpha(opacity:0);}
+#div2{width:400px;height:400px;overflow:hidden;position:absolute;top:50px;left:250px;display:none}
+#div2 img{position:absolute;top:0;left:0}
+
+</style>
+
+<script>
+window.onload=function(){
+	
+	var oDiv1=document.getElementById('div1');
+	
+	var ospan=document.getElementsByTagName('span')[0];
+	
+	var oDiv2=document.getElementById('div2');
+	
+	var img2=oDiv2.getElementsByTagName('img')[0];
+	
+	oDiv1.onmouseover=function(){
+		
+		ospan.style.display='block'
+		
+		oDiv2.style.display='block'
+
+		}
+		
+	oDiv1.onmouseout=function(){
+		
+		ospan.style.display='none'
+
+		oDiv2.style.display='none'
+
+		}
+		
+	ospan.onmousemove=function(ev){
+		
+		var ev=ev || window.event;
+		
+		var L=ev.clientX-oDiv1.offsetLeft-ospan.offsetWidth/2;
+		
+		var T=ev.clientY-oDiv1.offsetTop-ospan.offsetTop/2;
+		
+		if(L<0){
+			
+			L=0
+			
+			          }
+		else if( L> oDiv1.offsetWidth-ospan.offsetWidth)
+		   {
+			
+			L=oDiv1.offsetWidth-ospan.offsetWidth;
+			
+			          }	
+					  
+					  
+		if(T<0){
+			
+			T=0
+			
+			          }
+		else if( T> oDiv1.offsetHeight-ospan.offsetHeight)
+		   {
+			
+			T=oDiv1.offsetHeight-ospan.offsetHeight;
+			
+			          }	
+		
+		
+		ospan.style.left=L+'px';
+		
+		ospan.style.top=T+'px';
+		
+		
+		var scaleX=L/(oDiv1.offsetWidth-ospan.offsetWidth)
+		
+		var scaleY=T/(oDiv1.offsetHeight-ospan.offsetHeight)
+		
+        img2.style.left=-scaleX*(img2.offsetWidth-oDiv2.offsetWidth)+'px';
+		
+        img2.style.top=-scaleY*(img2.offsetHeight-oDiv2.offsetHeight)+'px';
+
+
+		}	
+		
+				  
+
+	
+	
+	
+	}
+
+
+
+//bug 问题：加一个隔离层
+</script>
+
+<body>
+<div id="div1">
+<img src="1.jpg">
+<span></span>
+<div id="mark"></div>
+</div>
+<div id="div2">
+<img src="2.jpg">
+
+</div>
+</body>
+</html>
