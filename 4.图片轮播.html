@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+*{padding:0;margin:0;list-style:none}
+#box1{width:400px;height:400px;margin:0 auto;border:1px solid blue;position:relative;overflow:hidden}
+#box1 ul{position:absolute;top:0;left:0}   
+
+#box1 img{width:400px;height:400px}
+#box1 ol{width:120px;height:20px;position:absolute;right:0;bottom:10px;}
+#box1 ol li{display:inline-block;width:20px;height:20px;float:left;margin-right:10px;background:#fff}
+#box1 .active{background:blue}
+</style>
+<script src="jq.js"></script>       
+  
+<script>
+window.onload=function(){
+	
+	var oUl=document.getElementsByTagName('ul')[0]; 
+	var oUlLi=oUl.getElementsByTagName('li');
+ 
+    var oOl=document.getElementsByTagName('ol')[0];
+	var oOlLi=oOl.getElementsByTagName('li');
+	
+	var oneHeight=oUlLi[0].offsetHeight          //这里容易记错，
+	
+	for(var i=0;i<oOlLi.length;i++){               //并且，ul 一定要加定位，不然不能实现
+		
+		
+		oOlLi[i].index=i
+		oOlLi[i].onclick=function(){
+			
+			
+			for(var i=0;i<oOlLi.length;i++){
+				
+				oOlLi[i].className='';	
+					 
+				}
+			
+				this.className='active'	;
+				
+				startMove(oUl, {top : -this.index*oneHeight})
+			}
+
+		}
+
+}
+
+
+</script>
+<body>
+<div id="box1">
+<ul>
+<li><img src="../图片切换系列作业 03 谢凯/图片1.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片2.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片3.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片4.jpg"/></li>
+</ul>
+<ol>
+<li class="active"></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+
+</div>
+</body>
+</html>
