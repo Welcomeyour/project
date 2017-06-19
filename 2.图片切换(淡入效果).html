@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+*{padding:0;margin:0;list-style:none}
+#box1{width:400px;height:400px;margin:0 auto;border:1px solid blue;position:relative}
+#box1 ul li{display:none}
+#box1 img{width:400px;height:400px}
+#box1 ol{width:120px;height:20px;position:absolute;right:0;bottom:10px;}
+#box1 ol li{display:inline-block;width:20px;height:20px;float:left;margin-right:10px;background:#fff}
+#box1 .active{background:blue}
+</style>
+<script src="jq.js"></script>       
+  
+<script>
+window.onload=function(){
+	
+	var oUl=document.getElementsByTagName('ul')[0]; 
+	var oUlLi=oUl.getElementsByTagName('li');
+ 
+    var oOl=document.getElementsByTagName('ol')[0];
+	var oOlLi=oOl.getElementsByTagName('li');
+	
+	for(var i=0;i<oOlLi.length;i++){
+		
+		
+		oOlLi[i].index=i
+		oOlLi[i].onclick=function(){
+			
+			
+			for(var i=0;i<oOlLi.length;i++){
+				
+				oOlLi[i].className=''
+				oUlLi[i].style.display='none'
+				oUlLi[i].style.filter='alpha(opacity=0)' //透明度兼容处理
+				oUlLi[i].style.opacity='0'               
+				}
+			
+			this.className='active'
+			oUlLi[this.index].style.display='block'
+			startMove(oUlLi[this.index],{opacity:100});    //图片淡入淡出效果，需要运动配合透明度来使用
+			                                               // 所以filter:alpho(opacity=0) 是兼容性处理
+														   // 注意：startMove(obj,json,endFn) 的格式；中间是json格式
+			
+			}
+		
+		
+		
+		}
+	
+	
+	
+}
+
+
+</script>
+<body>
+<div id="box1">
+<ul>
+<li style="display:block"><img src="../图片切换系列作业 03 谢凯/图片1.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片2.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片3.jpg"/></li>
+<li><img src="../图片切换系列作业 03 谢凯/图片4.jpg"/></li>
+</ul>
+<ol>
+<li class="active"></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+
+</div>
+</body>
+</html>
