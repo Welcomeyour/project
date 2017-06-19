@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+
+*{margin:0;padding:0;list-style:none;}
+#div1{width:300px;height:300px;border:1px solid red;margin:0 auto;position:relative;overflow:hidden}
+#div1 img{width:300px;height:300px;display:block}
+#div1 ul{height:300px;position:absolute;}
+#div1 ul li{float:left;}
+
+#btn{position:absolute;width:100%;text-align:center;bottom:0}
+#btn a{cursor:pointer;display:inline-block;width:12px;height:12px;background:#ccc;}
+#btn a.active{background:blue}
+#btn a:hover{background:blue}
+
+</style>
+<script src="jq.js"></script>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var oUL=document.getElementsByTagName('ul')[0];
+	var oLi=oUL.getElementsByTagName('li');
+	var oImg=document.getElementsByTagName('img');
+	var oBtn=document.getElementById('btn');
+	var oA=document.getElementsByTagName('a')
+	
+	var oImgwidth=300;
+	var num=0;
+	var num2=0;
+	var timer=null;
+	oUL.style.width=oImg.length*oImgwidth+'px'        //UL 长度(注意px单位)
+	
+	for(var i=0;i<oA.length;i++){
+		
+		oA[i].index=i;
+		oA[i].onclick=function(){
+			for(var i=0;i<oA.length;i++){
+				oA[i].className=''
+				}
+			
+       oA[this.index].className='active';
+	   
+	   num=this.index;
+	   num2=this.index;
+
+		startMove(oUL,{left:-this.index*oImgwidth})
+		
+		
+		}
+		
+		}
+	
+	function fn(){
+		
+		if(num==oLi.length-1){
+			
+			oLi[0].style.position='relative';
+			oLi[0].style.left=oLi.length*oImgwidth+'px';
+			num=0
+	
+			}
+			
+			else{
+				
+				num++
+				}
+				
+			num2++;
+			
+	    startMove(oUL,{left:-num2*oImgwidth},function(){
+			
+		if(num==0){	
+			oLi[0].style.position='static';
+			
+			oUL.style.left=0;
+			
+			num2=0
+			
+		}                             
+			
+			}) 
+			
+			
+			
+			for(var i=0;i<oA.length;i++){
+                 
+				  
+				oA[i].className=''
+				
+				
+	   
+				}
+			oA[num].className='active'	
+			
+			
+			
+			oDiv.onmouseover=function(){
+
+                  clearInterval(timer)     
+				}
+				
+				 
+			oDiv.onmouseout=function(){
+                     
+			     
+                  timer=setInterval(fn,2000)    
+				}
+	
+		}
+	
+	timer=setInterval(fn,2000)
+		
+	
+	}
+</script>
+<body>
+<div id="div1">
+<ul>
+<li><img src="图片1.jpg"/></li>
+<li><img src="图片2.jpg"/></li>
+<li><img src="图片3.jpg"/></li>
+<li><img src="图片4.jpg"/></li>
+</ul>
+<div id="btn">
+<a href="javascript:;" class="active"></a>
+<a href="javascript:;"></a>
+<a href="javascript:;"></a>
+<a href="javascript:;"></a>
+<div>
+
+</div>
+
+</body>
+</html>
+
