@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function()
+{
+	
+	var oDiv=document.getElementById('div1')
+	
+	var oDiv1=document.getElementById('div2')
+	
+	oDiv.onmousedown=function(ev)
+	{
+	   var ev = ev || event
+	   
+	   var disX=ev.clientX-oDiv.offsetLeft
+	   var disY=ev.clientY-oDiv.offsetTop
+	
+		
+		
+		
+	//oDiv.onmousemove=function(ev)       //存在问题，鼠标移动太快，方块会脱离
+	document.onmousemove=function(ev)
+	{
+	   var ev = ev || event
+	   
+	   var T=ev.clientX-disX
+	   
+	   var L=ev.clientY-disY
+	   
+	   oDiv.style.left=T+'px'
+	   oDiv.style.top=L+'px'
+	   
+	  
+			var L1 = T + oDiv.offsetWidth;  //小方框到页面左边的距离+本身的宽度
+			var L2 = oDiv1.offsetLeft;//大方框到页面左边的距离
+			
+			var T1 = L + oDiv.offsetHeight;////小方框到页面顶部的距离+本身的高度
+			var T2 = oDiv1.offsetTop;//大方框到页面顶部的距离
+			
+			
+			var R1 = T;//小方框到页面左边的距离
+			var R2 = oDiv1.offsetLeft + oDiv1.offsetWidth;////大方框到页面左边的距离 + 本身的宽
+			
+			var B1 = L;//小方框到页面顶部的距离
+			var B2 = oDiv1.offsetTop + oDiv1.offsetHeight;////大方框到页面顶部的距离 + 本身的高
+			
+			
+			
+			if( L1 < L2 || T1 < T2 || R1 > R2 || B1 > B2 )
+			{
+				oDiv1.style.background = 'red';
+				oDiv1.style.color = '#fff';
+				oDiv1.innerHTML = '在我这释放元素';
+			}
+			else
+			{
+				oDiv1.style.background = 'yellow';
+				oDiv1.innerHTML = '可以释放鼠标了';
+				oDiv1.style.color = 'red';
+			};
+
+
+		}
+		
+	oDiv.onmouseup=function()
+	{
+		
+	   oDiv.onmousemove=oDiv.onmouseup=null
+		
+		}
+	
+	}
+
+	
+	
+}
+
+
+</script>
+
+<body>
+<div id="div1" style="width:100px;height:100px;background:red;position:absolute;top:0;left:0"></div>
+
+<div id="div2" style="width:200px;height:200px;background:blue;position:absolute;top:200px;left:600px"></div>
+</body>
+</html>
