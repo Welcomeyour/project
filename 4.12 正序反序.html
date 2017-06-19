@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+*{list-style:none;padding:0;margin:0 auto;font-size:16px}
+
+p{text-align:center;padding-top:20px}
+p input{height:40px;}
+ul{width:802px;height:442px;margin-top:20px;border:1px solid blue}
+ul li{float:left;text-align:center;width:200px;height:220px;}
+ul li img{width:200px;height:200px;}
+
+</style>
+<script>
+window.onload=function()
+{
+	var oBtn1=document.getElementById('btn1')
+	var oBtn2=document.getElementById('btn2')
+	var oUL=document.getElementsByTagName('ul')[0]
+	var aLi=oUL.getElementsByTagName('li')
+	var onoff=true
+	
+	oBtn1.onclick=function()
+	{ 
+	   if(onoff)
+	   {   oBtn1.value='从大到小'
+	        onoff=false 
+	   }
+	   else
+	   {
+		   oBtn1.value='从小到大'
+	        onoff=true
+	   }
+	  
+	  
+		var arr=[]
+		for(var i=0;i<aLi.length;i++)
+		{
+			arr.push(aLi[i])
+			
+		}
+		arr.reverse();
+		
+		var str=''
+		
+		for(var i=0;i<aLi.length;i++)
+		{
+			str+='<li>'+arr[i].innerHTML+'</li>'
+			
+			}
+              oUL.innerHTML=str
+			 
+	 }
+	
+	oBtn2.onclick=function()
+	{
+		var arr2=[]
+		for(var i=0;i<aLi.length;i++)
+		{
+			arr2.push(aLi[i])
+			
+		}
+		
+		arr2.sort(function()
+		{
+			return Math.random()-0.5    //这个我也不是很明白
+			
+			
+			})
+        
+		var str=''
+
+		for(var i=0;i<aLi.length;i++)
+		{
+			str+='<li>'+arr2[i].innerHTML+'</li>'
+			
+			}
+
+		
+		oUL.innerHTML=str
+		
+		
+	}
+	
+	
+}
+
+
+
+</script>
+
+
+
+<body>
+<p>
+<input id="btn1" type="button" value="从小到大">
+<input id="btn2" type="button" value="随机排序">
+</p>
+<ul>
+<li><img src="图片1.jpg"><span>图片一</span></li>
+<li><img src="图片2.jpg"><span>图片二</span></li>
+<li><img src="图片3.jpg"><span>图片三</span></li>
+<li><img src="图片4.jpg"><span>图片四</span></li>
+<li><img src="图片1.jpg"><span>图片五</span></li>
+<li><img src="图片2.jpg"><span>图片六</span></li>
+<li><img src="图片3.jpg"><span>图片七</span></li>
+<li><img src="图片4.jpg"><span>图片八</span></li>
+</ul>
+
+</body>
+</html>
